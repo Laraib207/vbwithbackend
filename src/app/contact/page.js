@@ -22,12 +22,10 @@
 // }
 
 
-'use client'
-import { useState } from 'react'
-import { 
-  FiMail, 
-  FiPhone, 
-  FiMapPin, 
+import {
+  FiMail,
+  FiPhone,
+  FiMapPin,
   FiSend,
   FiCheck,
   FiClock,
@@ -35,46 +33,7 @@ import {
 } from 'react-icons/fi'
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: ''
-  })
-  const [submitted, setSubmitted] = useState(false)
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
-
-      const result = await response.json()
-
-      if (result.success) {
-        setSubmitted(true)
-        setTimeout(() => {
-          setSubmitted(false)
-          setFormData({ name: '', email: '', phone: '', subject: '', message: '' })
-        }, 3000)
-      } else {
-        alert('Error submitting form: ' + result.error)
-      }
-    } catch (error) {
-      console.error('Form submission error:', error)
-      alert('Error submitting form. Please try again.')
-    }
-  }
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
 
   const contactInfo = [
     {
@@ -147,22 +106,12 @@ export default function Contact() {
           {/* Left Column - Contact Form */}
           <div className="relative">
             <div className="bg-white/80 backdrop-blur-xl rounded-3xl p-6 md:p-8 lg:p-10 shadow-2xl border-2 border-white/50">
-              {submitted ? (
-                <div className="text-center py-12">
-                  <div className="w-24 h-24 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                    <FiCheck className="w-12 h-12 text-white" />
-                  </div>
-                  <h3 className="text-3xl font-bold text-gray-900 mb-3">Message Sent!</h3>
-                  <p className="text-gray-600 text-lg">We'll get back to you within 24 hours.</p>
-                </div>
-              ) : (
-                <>
-                  <div className="mb-8">
-                    <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Send us a Message</h3>
-                    <p className="text-gray-600">Fill out the form and we'll respond promptly</p>
-                  </div>
+              <div className="mb-8">
+                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Send us a Message</h3>
+                <p className="text-gray-600">Fill out the form and we'll respond promptly</p>
+              </div>
 
-                  <form onSubmit={handleSubmit} className="space-y-5">
+                  <form action="https://formspree.io/f/mkgpgdov" method="POST" className="space-y-5">
                     <div className="grid sm:grid-cols-2 gap-5">
                       <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -253,8 +202,6 @@ export default function Contact() {
                       Send Message
                     </button>
                   </form>
-                </>
-              )}
             </div>
           </div>
 
