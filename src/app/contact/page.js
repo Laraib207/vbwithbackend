@@ -121,8 +121,6 @@ export default function Contact() {
                           type="text"
                           name="name"
                           required
-                          value={formData.name}
-                          onChange={handleChange}
                           className="w-full px-4 py-3 rounded-xl bg-gradient-to-r from-[#fef9c3]/30 to-[#DFC6F6]/30 border-2 border-gray-200 focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-900 placeholder-gray-500"
                           placeholder="Enter your name"
                         />
@@ -136,8 +134,6 @@ export default function Contact() {
                           type="tel"
                           name="phone"
                           required
-                          value={formData.phone}
-                          onChange={handleChange}
                           className="w-full px-4 py-3 rounded-xl bg-gradient-to-r from-[#fef9c3]/30 to-[#DFC6F6]/30 border-2 border-gray-200 focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-900 placeholder-gray-500"
                           placeholder="+91 1234567890"
                         />
@@ -148,15 +144,13 @@ export default function Contact() {
                       <label className="block text-sm font-semibold text-gray-700 mb-2">
                         Email Address *
                       </label>
-                      <input
-                        type="email"
-                        name="email"
-                        required
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-xl bg-gradient-to-r from-[#fef9c3]/30 to-[#DFC6F6]/30 border-2 border-gray-200 focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-900 placeholder-gray-500"
-                        placeholder="your@email.com"
-                      />
+                        <input
+                          type="email"
+                          name="email"
+                          required
+                          className="w-full px-4 py-3 rounded-xl bg-gradient-to-r from-[#fef9c3]/30 to-[#DFC6F6]/30 border-2 border-gray-200 focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-900 placeholder-gray-500"
+                          placeholder="your@email.com"
+                        />
                     </div>
 
                     <div>
@@ -166,8 +160,6 @@ export default function Contact() {
                       <select
                         name="subject"
                         required
-                        value={formData.subject}
-                        onChange={handleChange}
                         className="w-full px-4 py-3 rounded-xl bg-gradient-to-r from-[#fef9c3]/30 to-[#DFC6F6]/30 border-2 border-gray-200 focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-900"
                       >
                         <option value="">Select a subject</option>
@@ -186,8 +178,6 @@ export default function Contact() {
                       <textarea
                         name="message"
                         required
-                        value={formData.message}
-                        onChange={handleChange}
                         rows={5}
                         className="w-full px-4 py-3 rounded-xl bg-gradient-to-r from-[#fef9c3]/30 to-[#DFC6F6]/30 border-2 border-gray-200 focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-900 placeholder-gray-500 resize-none"
                         placeholder="Tell us about your requirements..."
@@ -296,12 +286,7 @@ export default function Contact() {
         </div>
       </div>
 
-      <style jsx>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 0.5; }
-          50% { opacity: 0.3; }
-        }
-      `}</style>
+
     </section>
   )
 }
