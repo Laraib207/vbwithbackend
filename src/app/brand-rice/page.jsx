@@ -479,7 +479,7 @@ function RotatingShowcase({ items = [] }) {
                     )}
                   </div>
                 </motion.div>
-              );
+              );          
             })}
 
             <motion.div 

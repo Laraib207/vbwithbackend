@@ -1498,6 +1498,9 @@ export default function Navbar() {
                       <LogoLink href="/palm-oil" className="block px-5 py-3 hover:bg-gradient-to-r hover:from-purple-50 hover:to-blue-50 text-base font-semibold" onClick={() => setProductsOpen(false)}>Palm Oil</LogoLink>
                     </li>
                     <li>
+                      <LogoLink href="/sunflower-Oil" className="block px-5 py-3 hover:bg-gradient-to-r hover:from-purple-50 hover:to-blue-50 text-base font-semibold" onClick={() => setProductsOpen(false)}>Sunflower Oil</LogoLink>
+                    </li>
+                     <li>
                       <LogoLink href="/brand-rice" className="block px-5 py-3 hover:bg-gradient-to-r hover:from-purple-50 hover:to-blue-50 text-base font-semibold" onClick={() => setProductsOpen(false)}>Brand Rice</LogoLink>
                     </li>
                   </ul>
