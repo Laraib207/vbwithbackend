@@ -28,11 +28,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useSplash } from "./SplashProvider";
+// import { useSplash } from "./SplashProvider";
 
 export default function LogoLink({ href, children, className, onClick, delay = null, ...props }) {
   const router = useRouter();
-  const { show } = useSplash();
+  // const { show } = useSplash();
 
   const handleClick = async (e) => {
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
@@ -46,11 +46,11 @@ export default function LogoLink({ href, children, className, onClick, delay = n
       }
     }
 
-    try {
-      await show(delay);
-    } catch (err) {
-      // ignore
-    }
+    // try {
+    //   await show(delay);
+    // } catch (err) {
+    //   // ignore
+    // }
 
     router.push(href);
   };

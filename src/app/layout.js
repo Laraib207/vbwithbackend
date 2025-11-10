@@ -6,17 +6,17 @@ export const metadata = {
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import SplashProvider from "../components/SplashProvider";
+// import SplashProvider from "../components/SplashProvider";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <SplashProvider>
+        {/* <SplashProvider> */}
           <Navbar />
           {children}
           <Footer />
-        </SplashProvider>
+        {/* </SplashProvider> */}
       </body>
     </html>
   );
