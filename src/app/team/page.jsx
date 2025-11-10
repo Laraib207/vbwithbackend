@@ -308,9 +308,9 @@ import React from "react";
 export default function Team() {
   const members = [
     {
-      name: "Shobhita Mehrotra",
+      name: "Charu ",
       role: "HR Head & Manager",
-      image: "/images/team1.jpg",
+      image: "/images/sunflower-blog.jpg",
       description: "Experienced managing director leading company growth and innovation with a passion for excellence and teamwork",
       achievements: ["Technical Excellence", "15+ Years Experience, Industry Leader,Visionary Leadership"],
       social: {
@@ -323,13 +323,14 @@ export default function Team() {
     {
       name: "Md Laraib",
       role: "Full Stack Developer",
-      image: "images/team2.jpg",
+      image: "/images/team2.jpg",
       description: "Skilled web developer crafting seamless digital experiences with expertise in modern frameworks and responsive design techniques. i develop high-quality websites that engage users and drive results.",
       achievements: ["Full-stack", "E-commarce", "1+ Years Experience"],
       social: {
         linkedin: "https://",
-        twitter: "https://twitter.com",
-        email: "mailto:satya@company.com"
+        // twitter: "https://twitter.com",
+        email: "laraibsiddiqui10ki@gmail.com",
+        Protofilo :"https://lightyellow-falcon-969571.hostingersite.com"
       },
       position: "center",
       gradient: "from-blue-600 via-cyan-600 to-teal-600"
@@ -337,7 +338,7 @@ export default function Team() {
     {
       name: "Tahir",
       role: "Digetal Marketing & SEO Expert",
-      image: "/team3.jpg",
+      image: "/images/TahirBhai.jpeg",
       description: " Dynamic marketing leader driving brand growth and online presence with innovative strategies and data-driven insights ,SEO expertise to boost visibility and engagement. Deep Knowledge of digital trends and consumer behavior.",
       achievements: ["Digital Strategy", "SEO Mastery", "5+ Years Experience"],
       social: {
@@ -348,48 +349,52 @@ export default function Team() {
       position: "right",
       gradient: "from-orange-600 via-red-600 to-pink-600"
     },
-    {
-      name: "Tanya ",
-      role: "Sales Executive & Client Relations",
-      image: "/team4.jpg",
-      description: "Dynamic sales executive driving revenue growth and client satisfaction through strategic relationship management and innovative sales techniques. Proven track record of exceeding targets and delivering exceptional results.",
-      achievements: ["Sales Growth", "Client Retention", "1+ Years Experience"],
-      social: {
-        linkedin: "https://linkedin.com",
-        github: "https://github.com",
-        email: "mailto:abhisekh@company.com"
-      },
-      position: "left",
-      gradient: "from-emerald-600 via-green-600 to-teal-600"
-    },
-    {
-      name: "Raj Kumar panday",
-      role: "sales Executive",
-      image: "/team5.jpg",
-      description: "Sales executive driving revenue growth and client satisfaction through strategic relationship management and innovative sales techniques",
-      achievements: ["Sales Growth", "Client Retention", "1+ Years Experience"],
-      social: {
-        linkedin: "https://linkedin.com",
-        twitter: "https://twitter.com",
-        email: "mailto:priya@company.com"
-      },
-      position: "center",
-      gradient: "from-rose-600 via-pink-600 to-fuchsia-600"
-    },
-    {
-      name: "Anjul Kumar",
-      role: "Graphic Designer",
-      image: "/team6.jpg",
-      description: "Creative graphic designer crafting visually stunning designs that elevate brand identity and engage audiences across digital and print media",
-      achievements: ["Visual Storytelling", "Branding Expert", "Creative Direction"],
-      social: {
-        linkedin: "https://linkedin.com",
-        github: "https://github.com",
-        email: "mailto:rajesh@company.com"
-      },
-      position: "right",
-      gradient: "from-violet-600 via-purple-600 to-indigo-600"
-    },
+    // {
+    //   name: "Tanya ",
+    //   role: "Sales Executive & Client Relations",
+    //   image: "/team4.jpg",
+    //   description: "Dynamic sales executive driving revenue growth and client satisfaction through strategic relationship management and innovative sales techniques. Proven track record of exceeding targets and delivering exceptional results.",
+    //   achievements: ["Sales Growth", "Client Retention", "1+ Years Experience"],
+    //   social: {
+    //     linkedin: "https://linkedin.com",
+    //     github: "https://github.com",
+    //     email: "mailto:abhisekh@company.com"
+    //   },
+    //   position: "left",
+    //   gradient: "from-emerald-600 via-green-600 to-teal-600"
+    // },
+
+
+    // {
+    //   name: "Raj Kumar panday",
+    //   role: "sales Executive",
+    //   image: "/team5.jpg",
+    //   description: "Sales executive driving revenue growth and client satisfaction through strategic relationship management and innovative sales techniques",
+    //   achievements: ["Sales Growth", "Client Retention", "1+ Years Experience"],
+    //   social: {
+    //     linkedin: "https://linkedin.com",
+    //     twitter: "https://twitter.com",
+    //     email: "mailto:priya@company.com"
+    //   },
+    //   position: "center",
+    //   gradient: "from-rose-600 via-pink-600 to-fuchsia-600"
+    // },
+
+
+    // {
+    //   name: "Anjul Kumar",
+    //   role: "Graphic Designer",
+    //   image: "/team6.jpg",
+    //   description: "Creative graphic designer crafting visually stunning designs that elevate brand identity and engage audiences across digital and print media",
+    //   achievements: ["Visual Storytelling", "Branding Expert", "Creative Direction"],
+    //   social: {
+    //     linkedin: "https://linkedin.com",
+    //     github: "https://github.com",
+    //     email: "mailto:rajesh@company.com"
+    //   },
+    //   position: "right",
+    //   gradient: "from-violet-600 via-purple-600 to-indigo-600"
+    // },
     // {
     //   name: "Sneha Patel",
     //   role: "SEO & Digital Marketing Expert",
