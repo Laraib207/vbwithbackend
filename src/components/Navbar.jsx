@@ -1360,6 +1360,8 @@
 
 
 //previously generated code// "use client";
+
+
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -1453,9 +1455,9 @@ export default function Navbar() {
             </LogoLink>
             {/* Brand name - visible on all screens */}
             <div className="flex flex-col leading-tight ml-2">
-              <span className="font-extrabold text-xl sm:text-2xl md:text-3xl tracking-tight text-[#08348b]">Shri Shyam Agro</span>
-              <span className="font-extrabold text-xl sm:text-2xl md:text-3xl tracking-tight text-[#08348b]"> Industries</span>
-              {/* <span className="italic text-sm sm:text-sm md:text-base text-[#aa2266]">वाह! मज़ा आ गया</span> */}
+              <span className="font-extrabold text-xl sm:text-2xl md:text-3xl tracking-tight text-[#08348b]">Veer Bharat</span>
+              {/* <span className="font-extrabold text-xl sm:text-2xl md:text-3xl tracking-tight text-[#08348b]"> Industries</span> */}
+              <span className="italic text-sm sm:text-sm md:text-base text-[#aa2266]">वाह! मज़ा आ गया</span>
               {/* <span className="italic text-sm sm:text-sm md:text-base text-[#aa2266]">वाह! मज़ा आ गया</span> */}
             </div>
           </div>
