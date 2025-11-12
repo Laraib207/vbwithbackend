@@ -1,8 +1,10 @@
 
- "use client";
+"use client";
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { FiMail, FiPhone, FiMapPin, FiSend, FiX } from 'react-icons/fi';
 
 function PdfIcon({ className = "w-12 h-12" }) {
   return (
@@ -40,26 +42,21 @@ function BrochureCard({ brochure, onRemove }) {
         </p>
 
         <div className="mt-4 flex items-center gap-3">
-          <a
-            href={href}
-            download={fileName}
-            target="_blank"
-            rel="noreferrer"
+          <button
+            onClick={() => openModal(brochure)}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#f6b84b] text-black font-semibold shadow hover:scale-[1.02] transition"
             aria-label={`Download ${fileName}`}
           >
             Download
-          </a>
+          </button>
 
-          <a
-            href={href}
-            target="_blank"
-            rel="noreferrer"
+          <button
+            onClick={() => openModal(brochure)}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#e6e6e6] text-[#0b2b52] font-medium hover:bg-gray-50 transition"
             aria-label={`View ${fileName}`}
           >
             View
-          </a>
+          </button>
 
           {onRemove && (
             <button
@@ -96,6 +93,11 @@ export default function BrochurePage() {
   ];
 
   const [brochures, setBrochures] = useState(initial);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedBrochure, setSelectedBrochure] = useState(null);
+  const [formData, setFormData] = useState({ name: '', phone: '', email: '', address: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [downloadReady, setDownloadReady] = useState(false);
   const fileInputRef = useRef(null);
 
   useEffect(() => {
@@ -139,6 +141,103 @@ export default function BrochurePage() {
       return s.filter((b) => b.id !== id);
     });
   }
+
+  const openModal = (brochure) => {
+    setSelectedBrochure(brochure);
+    setModalOpen(true);
+    setDownloadReady(false);
+    setFormData({ name: '', phone: '', email: '', address: '' });
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setSelectedBrochure(null);
+    setDownloadReady(false);
+  };
+
+  const handleFormChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // const handleFormSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setIsSubmitting(true);
+
+  //   try {
+  //     // Use Formspree like the contact form
+  //     const formDataToSend = new FormData();
+  //     formDataToSend.append('name', formData.name);
+  //     formDataToSend.append('phone', formData.phone);
+  //     formDataToSend.append('email', formData.email);
+  //     formDataToSend.append('address', formData.address);
+  //     formDataToSend.append('subject', 'Brochure Download Request');
+
+  //     const response = await fetch('https://formspree.io/f/mkgpgdov', {
+  //       method: 'POST',
+  //       body: formDataToSend,
+  //     });
+
+  //     if (response.ok) {
+  //       setDownloadReady(true);
+  //     } else {
+  //       alert('Error submitting form. Please try again.');
+  //     }
+  //   } catch (error) {
+  //     console.error('Form submission error:', error);
+  //     alert('Error submitting form. Please try again.');
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
+
+const handleFormSubmit = async (e) => {
+  e.preventDefault();
+  setIsSubmitting(true);
+
+  try {
+    const res = await fetch("/api/brochure", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...formData, // name, phone, email, address
+        from: "brochure",
+        brochureTitle: selectedBrochure?.title || "",
+        brochureFile: selectedBrochure?.fileName || "",
+      }),
+    });
+
+    if (res.ok) {
+      setDownloadReady(true);
+    } else {
+      alert("Form submit failed. Try again.");
+    }
+  } catch (err) {
+    alert("Error submitting form.");
+  }
+  setIsSubmitting(false);
+};
+
+
+
+
+  const handleDownload = () => {
+    if (selectedBrochure) {
+      const link = document.createElement('a');
+      link.href = selectedBrochure.fileUrl;
+      link.download = selectedBrochure.fileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      closeModal();
+    }
+  };
+
+  const handleView = () => {
+    if (selectedBrochure) {
+      window.open(selectedBrochure.fileUrl, '_blank');
+      closeModal();
+    }
+  };
 
   return (
     <main className="min-h-screen bg-[#f8fafc] text-[#0b0d11] py-12">
@@ -192,6 +291,146 @@ export default function BrochurePage() {
             2) Commit & push, then deploy. The file will be available at <code className="bg-gray-100 px-1 rounded">/docs/brochure.pdf</code>.
           </p>
         </section> */}
+
+        {/* Modal */}
+        <AnimatePresence>
+          {modalOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50"
+              onClick={closeModal}
+            >
+              <motion.div
+                initial={{ scale: 0.95, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.95, opacity: 0 }}
+                className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-xl font-bold text-gray-900">
+                      {downloadReady ? 'Download Ready!' : 'Download Brochure'}
+                    </h3>
+                    <button
+                      onClick={closeModal}
+                      className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                    >
+                      <FiX className="w-5 h-5" />
+                    </button>
+                  </div>
+
+                  {!downloadReady ? (
+                    <form onSubmit={handleFormSubmit} className="space-y-5">
+                      <div className="grid sm:grid-cols-2 gap-5">
+                        <div>
+                          <label className="block text-sm font-semibold text-gray-700 mb-2">
+                            Your Name *
+                          </label>
+                          <input
+                            type="text"
+                            name="name"
+                            required
+                            value={formData.name}
+                            onChange={handleFormChange}
+                            className="w-full px-4 py-3 rounded-xl bg-gradient-to-r from-[#fef9c3]/30 to-[#DFC6F6]/30 border-2 border-gray-200 focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-900 placeholder-gray-500"
+                            placeholder="Enter your name"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-semibold text-gray-700 mb-2">
+                            Phone Number *
+                          </label>
+                          <input
+                            type="tel"
+                            name="phone"
+                            required
+                            value={formData.phone}
+                            onChange={handleFormChange}
+                            className="w-full px-4 py-3 rounded-xl bg-gradient-to-r from-[#fef9c3]/30 to-[#DFC6F6]/30 border-2 border-gray-200 focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-900 placeholder-gray-500"
+                            placeholder="+91 1234567890"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-700 mb-2">
+                          Email Address *
+                        </label>
+                        <input
+                          type="email"
+                          name="email"
+                          required
+                          value={formData.email}
+                          onChange={handleFormChange}
+                          className="w-full px-4 py-3 rounded-xl bg-gradient-to-r from-[#fef9c3]/30 to-[#DFC6F6]/30 border-2 border-gray-200 focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-900 placeholder-gray-500"
+                          placeholder="your@email.com"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-700 mb-2">
+                          Your Address *
+                        </label>
+                        <textarea
+                          name="address"
+                          required
+                          value={formData.address}
+                          onChange={handleFormChange}
+                          rows={4}
+                          className="w-full px-4 py-3 rounded-xl bg-gradient-to-r from-[#fef9c3]/30 to-[#DFC6F6]/30 border-2 border-gray-200 focus:border-red-500 focus:outline-none transition-all duration-300 text-gray-900 placeholder-gray-500 resize-none"
+                          placeholder="Your complete address..."
+                        />
+                      </div>
+
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="group w-full px-8 py-4 rounded-xl bg-gradient-to-r from-red-600 to-orange-600 text-white font-bold text-lg shadow-xl hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                            Submitting...
+                          </>
+                        ) : (
+                          <>
+                            <FiSend className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                            Submit & Download
+                          </>
+                        )}
+                      </button>
+                    </form>
+                  ) : (
+                    <div className="text-center space-y-4">
+                      <div className="text-green-600 text-4xl mb-2">✓</div>
+                      <p className="text-gray-700 mb-4">
+                        Thank you! Your information has been submitted successfully.
+                      </p>
+                      <div className="flex gap-3">
+                        <button
+                          onClick={handleDownload}
+                          className="flex-1 bg-[#f6b84b] text-black font-semibold py-3 px-4 rounded-lg hover:bg-[#e59e3d] transition-colors"
+                        >
+                          Download PDF
+                        </button>
+                        <button
+                          onClick={handleView}
+                          className="flex-1 border border-gray-300 text-gray-700 font-semibold py-3 px-4 rounded-lg hover:bg-gray-50 transition-colors"
+                        >
+                          View PDF
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </main>
   );
